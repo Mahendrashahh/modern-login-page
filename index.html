@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Modern-login-page</title>
-   
+
     <style>
         body {
             background-color: black;
@@ -27,7 +27,7 @@
             margin-left: 470px;
             box-shadow: 4px 4px 20px palegoldenrod;
             margin-bottom: 50px;
-            margin-top: 180px;
+            margin-top: 120px;
         }
 
 
@@ -118,6 +118,35 @@
                 padding: 8px;
             }
         }
+
+        .notification {
+            color: white;
+            text-align: center;
+
+
+            width: 45vw;
+            border-radius: 15px;
+            height: 12vh;
+        }
+
+        .notify {
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            margin-bottom: 40px;
+        }
+
+        h3 {
+            font-size: 17px;
+            font-weight: 800;
+            padding: 10px;
+            background-color: transparent;
+            text-transform: capitalize;
+            letter-spacing: 2px;
+            box-shadow: 4px 4px 10px palegoldenrod;
+            border-radius: 15px;
+
+        }
     </style>
 </head>
 
@@ -138,17 +167,29 @@
 
             <button type="submit" class="btn-btn-primary">Submit</button>
         </div>
+
+
+
+
+
     </div>
+
+
+
+    </div>
+
+
     <script>
         document.querySelector(".btn-btn-primary").addEventListener("click", function () {
             let username = document.getElementById("username").value;
             let password = document.getElementById("password").value;
 
-            if (username === "" || password === "") {
-                alert("Please fill all fields!");
-            } else {
-                alert("Login Successful!");
 
+            if (username === "" || password === "") {
+                firststep();
+            } else {
+
+                messagebox(username);
             }
         });
 
@@ -160,6 +201,87 @@
                 pass.type = "password";
             }
         }
+
+
+
+
+        let notifyBox;           // global reference
+        let notifyTimeout;
+
+        function messagebox(username) {
+
+            if (notifyBox) {
+                notifyBox.remove();
+                clearTimeout(notifyTimeout);
+            }
+
+
+            let div = document.createElement("div");
+            div.classList.add("notify");
+            let div1 = document.createElement("div");
+            div1.classList.add("notification");
+            let h3 = document.createElement("h3");
+
+            h3.textContent = `Hey Welcome ${username}`;
+            h3.style.color = "lightgreen";
+            div1.appendChild(h3);
+            div.appendChild(div1);
+
+
+            document.body.appendChild(div);
+
+
+
+            notifyBox = div;
+
+            // 2 second baad hatane ke liye
+            notifyTimeout = setTimeout(() => {
+                div.remove();
+                notifyBox = null;
+            }, 2000);
+
+        };
+
+
+
+
+
+
+
+        function firststep() {
+
+            if (notifyBox) {
+                notifyBox.remove();
+                clearTimeout(notifyTimeout);
+            }
+
+
+            let div = document.createElement("div");
+            div.classList.add("notify");
+            let div1 = document.createElement("div");
+            div1.classList.add("notification");
+            let h3 = document.createElement("h3");
+            h3.style.color = "red";
+            h3.textContent = "please fill your detail once";
+            div1.appendChild(h3);
+            div.appendChild(div1);
+
+
+            document.body.appendChild(div);
+
+
+            notifyBox = div;
+
+            // 2 second baad hatane ke liye
+            notifyTimeout = setTimeout(() => {
+                div.remove();
+                notifyBox = null;
+            }, 2000);
+
+
+        }
+
+
     </script>
 
 </body>
